@@ -191,7 +191,10 @@ const store = createStore( {
                 });
             }
             return response;
-        }
+        },
+        deleteQuote({}, id) {
+            return axiosClient.delete(`/quote/${id}`);
+        },
     },
     mutations: {
         saveQuote: (state, quote) => {

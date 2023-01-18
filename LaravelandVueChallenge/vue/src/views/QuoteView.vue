@@ -202,6 +202,20 @@ function saveQuote() {
     });
 }
 
+function deleteQuote() {
+    if (
+        confirm(
+            `Are you sure you wish to delete this quote? This operation can not be undone`
+        )
+    ) {
+        store.dispatch("deleteQuote", model.value.id).then(() => {
+            router.push({
+                name: "Home",
+            });
+        });
+    }
+}
+
 </script>
 
 <style>
