@@ -4,6 +4,7 @@ import About from '../views/About.vue'
 import Quotes from '../views/Home.vue'
 import Quotetable from '../views/Quotetable.vue'
 import QuoteView from '../views/QuoteView.vue'
+import QuoteViewWithoutEdit from '../views/QuoteViewWithoutEdit.vue'
 
 const routes = [
     {
@@ -14,6 +15,7 @@ const routes = [
             { path: "/quotes", name:"Quotes", component: Quotes},
             { path: "/quotes/create", name:"QuoteCreate", component: QuoteView},
             { path: "/QuoteView/:id", name:"QuoteView", component: QuoteView},
+            { path: "/QuoteViewWithoutEdit/:id", name:"QuoteViewWithoutEdit", component: QuoteView},
         ],
     },
     {
@@ -30,6 +32,11 @@ const routes = [
         path: '/quoteview',
         name: 'QuoteView',
         component: QuoteView
+    },
+    {
+        path: '/quoteviewwithoutedit',
+        name: 'QuoteViewWithoutEdit',
+        component: QuoteViewWithoutEdit
     },
 ];
 

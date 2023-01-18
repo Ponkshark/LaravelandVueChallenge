@@ -5,7 +5,6 @@
       <ul>
           <li><a href="#"><router-link :to="{name: 'Home'}">Home</router-link></a></li>
           <li><a href="#"><router-link :to="{name: 'About'}">About</router-link></a></li>
-          <li><a href="#">Quote Table</a></li>
       </ul>
   </nav>
 </header>
@@ -31,7 +30,7 @@ header img {
 
 html {
   color: #dcdcdc;
-  margin-top: 80px;
+  margin-top: 50px;
   background-color: #282634;
   /*height: calc(100vh - 80px);*/
   padding-left: 5vh;
@@ -52,6 +51,7 @@ header {
     display: flex;
     align-items: center;
     box-shadow: 0 0 25px 0 black;
+    z-index: 5;
 }
 
 header * {

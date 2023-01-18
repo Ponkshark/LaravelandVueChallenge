@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+    Route::resource(name:'/quote', controller: \App\Http\Controllers\QuoteController::class);
 });

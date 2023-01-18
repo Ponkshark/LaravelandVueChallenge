@@ -10,10 +10,13 @@
 
 </PageComponent>
 <br>
-<div>
+<div class="addQuoteCont">
     <router-link
-    :to="{name:'QuoteCreate'}"
+    :to="{name:'QuoteView'}"
     >
+    <button class="addQuoteButton">
+    Add new quote
+    </button>
     </router-link>
 </div>
 <div class="quote-cont">
@@ -22,9 +25,14 @@
   :key="quote.id"
   class="quote-item"
 >
+<router-link
+    :to="{name: 'QuoteViewWithoutEdit', params: {id:quote.id}}"
+    
+>
 <img :src="quote.image" class="quote-img"/>
+</router-link>
 <h4 style="text-align: center">{{ quote.title }}</h4>
-<div v-html="quote.description"  style="text-align: center"></div>
+<div v-html="quote.description"  style="text-align: center; width: 300px; height: auto; overflow:auto;"></div>
 <div class="button-cont">
   <router-link
     :to="{name: 'QuoteView', params: {id:quote.id}}"
@@ -71,6 +79,22 @@ function deleteQuote(quote) {
 .button-cont {
   display: flex;
   justify-content: space-between;
+}
+
+.addQuoteCont {
+  text-align: right;
+}
+
+.addQuoteButton {
+  padding: 5px 15px;
+  color:#282634;
+  background-color: #dcdcdc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.addQuoteButton:hover {
+  background-color: #dcdcdcad;
 }
 
 .editbutton {
@@ -127,7 +151,17 @@ function deleteQuote(quote) {
     width: 300px;
     height: 300px;
     margin-bottom: 10px;
+    -webkit-filter: brightness(100%);
   }
+
+.quote-img:hover {
+  -webkit-filter: brightness(70%);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
 
 
 </style>

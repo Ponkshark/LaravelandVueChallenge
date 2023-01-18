@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('quotes', function (Blueprint $table) {
-            $table->id();
-            $table->string(column: 'title', length: 1000);
-            $table->string(column: 'slug', length: 1000);
-            $table->string(column: 'description', length: 1000)->nullable();
-            $table->timestamps();
+        Schema::table('quotes', function (Blueprint $table) {
+            $table->string(column: 'image', length: 255);
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotes');
+        Schema::table('quotes', function (Blueprint $table) {
+            $table->dropColumn(columns: 'image');
+        });
     }
 };

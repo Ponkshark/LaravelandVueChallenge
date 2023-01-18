@@ -9,23 +9,12 @@
         </template>
         <form @submit.prevent="saveQuote">
             <div>
-                <div class="quote-view-cont">
+                <div class="quote-view-cont2">
                     <div class="view-image-cont">
                         <label>
                             <b>Quote Image</b>
                         </label>
                         <div class="view-image-items">
-                            <button
-                                type="button"
-                                class="imagechangebutton"
-                            >
-                                <input
-                                    type="file"
-                                    @change="onImageChoose"
-                                    class="file-input"
-                                />
-                                Change image
-                            </button>
                             <img
                                 v-if="model.image"
                                 :src="model.image"
@@ -36,8 +25,11 @@
                             >
                             No Image
                             </span>
-                            
                         </div>
+                        <div class="horizontal-rule">
+                        <hr>
+                        </div>
+
                     </div>
                     <div class="view-title-cont">
                         <div class="view-title-label">
@@ -45,14 +37,18 @@
                             <b>Quote Title</b>
                         </label>
                         </div>
-                        <input
-                            type="text"
-                            name="title"
-                            id="title"
-                            v-model="model.title"
-                            autocomplete="quote_title"
-                        />
+                        <h3
+                        v-if="model.title"
+                        >{{ model.title }}</h3>
+                        <h3 v-else
+                        >
+                        No Title
+                        </h3>
                     </div>
+                    <div class="horizontal-rule">
+                    <hr>
+                    </div>
+
                     <div class="view-desc-cont">
                         <div class="view-desc-label">
                         <label for="about">
@@ -60,67 +56,62 @@
                         </label>
                         </div>
                         <div>
-                            <textarea
-                                id="description"
-                                name="description"
-                                rows="3"
-                                v-model="model.description"
-                                autocomplete="quote_description"
-                                placeholder="Describe the details of your quote"
+                            <h3
+                            v-if="model.description"
+                            >{{ model.description }}
+                            </h3>
+                            <h3 v-else
                             >
-                            </textarea>
+                            No Description
+                            </h3>
                         </div>
                     </div>
+                    <div class="horizontal-rule">
+                    <hr>
+                    </div>
+
                     <div class="view-status-cont">
                         <div>
-                            <input
-                                id="status"
-                                name="status"
-                                type="checkbox"
-                                v-model="model.status"
-                            />
-                            <label for="status">
-                                Is the Quote Open
-                            </label>
+                            <h3
+                            v-if="model.status === 'True'"
+                            >
+                            This quote is open
+                            </h3>
+                            <h3
+                            v-else-if="model.status === 'False'"
+                            >
+                            This quote is closed
+                            </h3>
+                            <h3
+                            v-else
+                            >
+                            Quote status has not been declared
+                            </h3>
+                            <br>
+                        </div>
+                        <div class="horizontal-rule">
+                        <hr>
                         </div>
                             
                     </div>
                     <div class="view-items-cont">
-                        <h3 class="items-table-cont">
-                            <span>
+                        <h3 class="items-table-cont2">
+                            <span class="items-text">
                             <b>Items</b>
-                            </span>
-                            <span>
-                                <button
-                                    type="button"
-                                    @click="addItem()"
-                                    class="quoteViewAddItemButton"
-                                >
-                                Add Item
-                                </button>
                             </span>
                         </h3>
                         <div v-if="!model.items.length">
                             This quote has no items
                         </div>
                         <div v-for="(name, index) in model.items" :key="name.id">
-                            <ItemEditor
+                            <ItemViewer
                                 :name="name"
                                 :index="index"
                                 @addItem="addItem"
                                 @deleteItem="deleteItem"
                             />
                         </div>
-                    </div>
-                    <div class="view-save-cont">
-                        <router-link :to="{name: 'Home'}">
-                        <button
-                            type="submit"
-                            class="save-button"
-                        >
-                        Save All
-                        </button>
-                        </router-link>
+                        <br>
                     </div>
                 </div>
 
@@ -136,7 +127,7 @@ import {ref} from "vue";
 import {routerKey, useRoute, useRouter} from "vue-router";
 
 import PageComponent from "../components/PageComponent.vue";
-import ItemEditor from "../components/editor/ItemEditor.vue";
+import ItemViewer from "../components/editor/ItemViewer.vue";
 
 const router = useRouter();
 
@@ -155,17 +146,6 @@ if (route.params.id) {
     model.value = store.state.quotes.find(
         (q) => q.id === parseInt(route.params.id)
     );
-}
-
-function onImageChoose(e) {
-    const file=e.target.files[0];
-
-    const reader = new FileReader();
-    reader.onload = () => {
-        model.value.image = reader.result;
-        model.value.image_url = reader.result;
-    };
-    reader.readAsDataURL(file);
 }
 
 function addItem(id) {
@@ -206,7 +186,14 @@ function saveQuote() {
 
 <style>
 
-.quote-view-cont{
+.horizontal-rule {
+    width: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+.quote-view-cont2{
     margin-top: 50px;
     margin-right: auto;
     margin-left: auto;
@@ -244,6 +231,7 @@ function saveQuote() {
 .view-image-items {
     display:flex;
     justify-content: center;
+    text-align: center;
     align-items: flex-end;
     margin-bottom: 25px;
     margin-top: 15px;
@@ -287,12 +275,13 @@ textarea {
     color: #525252ad !important;
 }
 
-.items-table-cont {
-    width: 555px;
+.items-table-cont2 {
+    width: 50px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     justify-content: space-between;
+    text-align: center;
     margin-bottom: 10px;
 }
 

@@ -14,6 +14,9 @@
     <p>The home screen displays all quotes currently implemented in the system. Each being displayed
         as a card with buttons below to either edit the quote, or delete it.
     </p>
+    <h1>Viewing Quotes</h1>
+    <p>To view any quote, just click on the image of the quote you wish to view.
+    </p>
     <h1>Editing Quotes</h1>
     <p>Upon clicking the edit button below a quote, you are taken to a page displaying all of the quotes
         information. From here fields such a title, description, etc are already filled in with the quotes
